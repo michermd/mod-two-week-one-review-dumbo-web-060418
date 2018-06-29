@@ -1,5 +1,56 @@
 class SeasController < ApplicationController
   #define your controller actions here
+  def welcome
+    render :welcome
+
+  end
+
+  def index
+    @seas = Sea.all
+
+    render :index #explicit call
+  end
+
+  def show
+    @sea = Sea.find(params[:id])
+
+    render :show #explicit call
+  end
+
+  def new
+    @sea = Sea.new
+    render :new
+  end
+
+  def create
+    @sea = Sea.create(sea_params)
+
+
+    redirect_to "/seas/#{@sea.id}"
+  end
+
+  def edit
+    @sea = Sea.find(params[:id])
+
+    render :edit #explicit call
+  end
+
+  def update
+
+    @sea = Sea.find(params[:id])
+
+    @sea.update(sea_params)
+
+    redirect_to "/seas/#{@sea.id}"
+  end
+
+  def destroy
+    @sea = Sea.find(params[:id])
+
+    @sea.destroy
+    redirect_to "/seas"
+  end
+
 
 
   private
